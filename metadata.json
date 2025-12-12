@@ -1,0 +1,7 @@
+{
+  "name": "NutriVision AI",
+  "description": "A smart nutrition tracker that uses AI to analyze food from text or photos, tracks your macros, and provides personalized dietary coaching.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
