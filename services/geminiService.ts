@@ -83,7 +83,7 @@ const recipeSchema = {
 export const analyzeFoodImage = async (base64Image: string): Promise<Omit<FoodItem, 'id' | 'timestamp' | 'mealType'>> => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: {
         parts: [
           {
@@ -115,7 +115,7 @@ export const analyzeFoodImage = async (base64Image: string): Promise<Omit<FoodIt
 export const analyzeFoodText = async (description: string): Promise<Omit<FoodItem, 'id' | 'timestamp' | 'mealType'>> => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: `Analyze this food description: "${description}". Estimate nutritional values.`,
       config: {
         responseMimeType: "application/json",
@@ -135,7 +135,7 @@ export const analyzeFoodText = async (description: string): Promise<Omit<FoodIte
 export const searchFoodDatabase = async (query: string): Promise<Omit<FoodItem, 'id' | 'timestamp' | 'mealType'>> => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: `Search for standard nutritional data for: "${query}". Return the most common serving size.`,
       config: {
         responseMimeType: "application/json",
@@ -155,7 +155,7 @@ export const searchFoodDatabase = async (query: string): Promise<Omit<FoodItem, 
 export const getDietaryCoachResponse = async (history: string, userQuery: string): Promise<string> => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: `User Context (Today's Log):\n${history}\n\nUser Question: ${userQuery}`,
       config: {
         systemInstruction: "You are NutriVision, a friendly, encouraging, and knowledgeable nutrition coach. Keep answers concise, actionable, and scientifically accurate. Use emojis occasionally to be friendly."
@@ -185,7 +185,7 @@ export const generateDailySummary = async (log: DailyLog, goals: MacroNutrients)
     `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -221,7 +221,7 @@ export const getMealSuggestions = async (remaining: MacroNutrients, mealType: st
     `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -241,7 +241,7 @@ export const getMealSuggestions = async (remaining: MacroNutrients, mealType: st
 export const generateFullRecipe = async (mealName: string): Promise<Recipe> => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: `Generate a detailed recipe for: "${mealName}". Include precise ingredients and step-by-step cooking instructions.`,
       config: {
         responseMimeType: "application/json",
@@ -287,7 +287,7 @@ export const getCookingAssistantResponse = async (recipeName: string, userQuery:
     });
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-2.5-flash",
       contents: { parts },
       config: {
         systemInstruction: "You are a helpful AI Sous Chef assisting a user while they cook. Keep answers short, encouraging, and focused on the cooking task. If the user sends an image, analyze it to give specific advice."
